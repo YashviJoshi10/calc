@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    background: linear-gradient(to right, rgb(36, 35, 36), rgb(97, 96, 96));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+table{
+    background-color: black;
+    border: 3px gray solid;
+}
+.number{
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    background-color: rgb(46, 45, 47);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: large;
+}
+.number:hover{
+    cursor: pointer;
+    background-color: rgba(118, 118, 118, 0.453);
+}
+#ans{
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px gray solid;
+    color: gray;
+    font-size: 40px;
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+}
+.op{
+    background-color: rgba(77, 77, 77, 0.907);
+}
