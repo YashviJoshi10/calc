@@ -11,7 +11,7 @@ let right_idx=0
 
 let f=false
 
-const get_nums = (o)=>{
+const get_nums = (o,n)=>{
     left_num = "";
     right_num = ""
     left_idx = n.indexOf(o)-1
@@ -23,7 +23,7 @@ const get_nums = (o)=>{
     }
     else{
         while (!op.includes(n[left_idx]) && left_idx>=0) {
-            left_num=n[left_idx]+left_num
+            left_num=String(n[left_idx])+left_num
             left_idx=left_idx-1
         }
     }
@@ -38,42 +38,43 @@ const get_nums = (o)=>{
             f=true
         }
         while (!op.includes(n[right_idx]) && right_idx<n.length) {
-            right_num=right_num+n[right_idx]
+            right_num=right_num+String(n[right_idx])
             right_idx=right_idx+1
         }
+         if (f) right_num = "-" + right_num;
     }
-    // console.log(left_num)
-    // console.log(right_num)
 }
 
 const calc = (n)=>{
+
+    while(n.includes("(")){
+        let start = n.lastIndexOf("(");
+        let end = n.indexOf(")", start);
+        let sub = n.slice(start + 1, end);
+        calc(sub);
+        n.splice(start, end - start + 1, a);
+    }
+
     if(n.includes("/")){
-        get_nums("/")
-        a = parseInt(left_num) / parseInt(right_num)
-        if (f) {
-            a=-a
-        }
+        get_nums("/",n)
+        a = Number(left_num) / Number(right_num)  
         n.splice(left_idx+1,right_idx-left_idx-1,a)
         calc(n)   
     }else if(n.includes("x")){
-        get_nums("x")
-        a = parseInt(left_num) * parseInt(right_num)
-        // 
-        if (f) {
-            a=-a
-        }
+        get_nums("x",n)
+        a = Number(left_num) * Number(right_num)        
         n.splice(left_idx+1,right_idx-left_idx-1,a) 
         console.log(n)       
         calc(n) 
     }else if(n.includes("-")){
-        get_nums("-")
-        a = parseInt(left_num) - parseInt(right_num)
+        get_nums("-",n)
+        a = Number(left_num) - Number(right_num)
         n.splice(left_idx+1,right_idx-left_idx-1,a)
         calc(n) 
     }
     else if(n.includes("+")){
-        get_nums("+")
-        a = parseInt(left_num) + parseInt(right_num)
+        get_nums("+",n)
+        a = Number(left_num) + Number(right_num)
         n.splice(left_idx+1,right_idx-left_idx-1,a)
         calc(n) 
     }
@@ -81,7 +82,6 @@ const calc = (n)=>{
 
 btn.forEach((b)=>{
     b.addEventListener("click",function(){
-        // console.log(b.value)
         if(b.value!="AC" && b.value!="="){            
             if(op.includes(b.value)){
                 if (op2.includes(n[(n.length)-1])) {
