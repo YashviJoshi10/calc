@@ -3,7 +3,7 @@ body{
     padding: 0;
     box-sizing: border-box;
     height: 100vh;
-    background: linear-gradient(to right, rgb(36, 35, 36), rgb(97, 96, 96));
+    background-color:darkgrey;
     display: flex;
     justify-content: center;
     align-items: center;
