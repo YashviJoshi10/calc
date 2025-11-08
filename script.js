@@ -49,10 +49,11 @@ const calc = (n)=>{
 
     while(n.includes("(")){
         let start = n.lastIndexOf("(");
-        let end = n.indexOf(")", start);
+        let end = n.includes(")",start)?n.indexOf(")", start):n.length
         let sub = n.slice(start + 1, end);
         calc(sub);
-        n.splice(start, end - start + 1, a);
+        let endct = n.includes(")",start)?end - start + 1 : end - start;
+        n.splice(start, endct, a);
     }
 
     if(n.includes("/")){
@@ -84,13 +85,16 @@ btn.forEach((b)=>{
     b.addEventListener("click",function(){
         if(b.value!="AC" && b.value!="="){            
             if(op.includes(b.value)){
-                if (op2.includes(n[(n.length)-1])) {
-                    n.pop()
-                    n.push(b.value)
-                } 
-                else{
-                    n.push(b.value)
-                }
+                if (op.includes(n[(n.length)-1])) {
+                    if (b.value=="-") {
+                        n.push(b.value)
+                    } else {                        
+                        n.pop()
+                        n.push(b.value)
+                    }
+                }else{
+                n.push(b.value)
+            }
             }else{
                 n.push(b.value)
             }
